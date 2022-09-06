@@ -1,11 +1,11 @@
 resource "aws_ecs_cluster" "main" {
-  name = "jms-cluster"
+  name = "my-cluster"
 }
-data "aws_ecr_repository" "nodeapp"{
-name = "nodeproj"
+data "aws_ecr_repository" "webapp"{
+name = "webproj"
 }
 data "template_file" "cb_app" {
-  template = file("./templates/ecs/cb_app.json.tpl")
+  template = file("./container-def.json")
 
   vars = {
     app_image      = data.aws_ecr_repository.nodeapp.repository_url
@@ -18,7 +18,7 @@ data "template_file" "cb_app" {
 }
 
 resource "aws_ecs_task_definition" "app" {
-  family                   = "jms-app-task"
+  family                   = "my-app-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -28,7 +28,7 @@ resource "aws_ecs_task_definition" "app" {
 }
 
 resource "aws_ecs_service" "main" {
-  name            = "jms-service1"
+  name            = "my-service1"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.app.arn
   desired_count   = var.app_count
@@ -42,7 +42,7 @@ resource "aws_ecs_service" "main" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.app.id
-    container_name   = "jms-app"
+    container_name   = "my-app"
     container_port   = var.app_port
   }
 
