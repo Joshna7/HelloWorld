@@ -28,7 +28,7 @@ jobs:
          image-name: myapp # Provide Docker image name
          image-tag: head # Provide Docker image tag
          dockerfile: hello/Dockerfile
-         repository: my/repository
+         repository: repository
          tag_with_ref: true
 
     
