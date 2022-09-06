@@ -3,6 +3,11 @@ variable "aws_region" {
   default     = "ap-south-1"
 }
 
+variable "shared_credentials_file" {
+   description = "aws credentials"
+  default = "/root/.aws/credentials"
+}
+
 variable "ecs_task_execution_role_name" {
   description = "ECS task execution role name"
   default = "myEcsTaskExecutionRole"
