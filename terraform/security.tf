@@ -1,6 +1,6 @@
 # ALB Security Group: Edit to restrict access to the application
 resource "aws_security_group" "lb" {
-  name        = "jms-load-balancer-security-group"
+  name        = "my-load-balancer-security-group"
   description = "controls access to the ALB"
   vpc_id      = aws_vpc.main.id
 
