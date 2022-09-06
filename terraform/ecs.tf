@@ -2,10 +2,10 @@ resource "aws_ecs_cluster" "main" {
   name = "my-cluster"
 }
 data "aws_ecr_repository" "webapp"{
-name = "webproj"
+name = "webapp"
 }
 data "template_file" "cb_app" {
-  template = file("./container-def.json")
+  template = file("./templates/ecs/container-def.json")
 
   vars = {
     app_image      = data.aws_ecr_repository.webapp.repository_url 
