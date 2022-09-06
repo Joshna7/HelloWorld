@@ -1,4 +1,4 @@
-variable "aws_region" {
+variable "aws" {
   description = "The AWS region things are created in"
   default     = "ap-south-1"
 }
