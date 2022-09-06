@@ -8,7 +8,7 @@ data "template_file" "cb_app" {
   template = file("./container-def.json")
 
   vars = {
-    app_image      = data.aws_ecr_repository.webapp.repository_url
+    app_image      = data.aws_ecr_repository.webapp.repository_url 
     app_port       = var.app_port
     fargate_cpu    = var.fargate_cpu
     fargate_memory = var.fargate_memory
