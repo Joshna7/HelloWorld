@@ -12,6 +12,12 @@ resource "aws_subnet" "public" {
   availability_zone = "ap-south-1a"
 }
 
+resource "aws_subnet" "public1" {
+  vpc_id = aws_vpc.main.id
+  cidr_block = "172.17.2.0/24"
+  availability_zone = "ap-south-1b"
+}
+
 ## Define the internet gateway
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
