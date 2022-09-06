@@ -1,25 +1,20 @@
 # Provisioning VPC, ECS Fagrate, ALB, Autoscaling using Terraform
+ Having AWS account and Terraform CLI installed.
 
-## Installing requirements
 
-Requires Python 3.8 or later.
+## Documentation
 
-The requirements can then be installed using pip:
+Note: created a new branch "release" and performed all the changes in release branch
 
-```
-python3.8 -m pip install -r requirements.txt
-```
+Containerized the application using AWS ECS Fargate using Terraform
 
-## Running the app
+Usage of each file:
 
-```
-uvicorn hello.main:app
-```
+alb.tf : created Application Load Balancer with target groups, security group and listener.
+auto_scaling.tf : Created autoscaling for the application based on Capacity, Cpu Utilization and Memory
+ecs.tf
 
-The app will listen on port 8000.
 
-http://127.0.0.1:8000
 
-The greeting can be configured with an query parameter:
 
-http://127.0.0.1:8000/?name=Dave
+
