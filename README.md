@@ -35,7 +35,7 @@ vpc.tf: Created the VPC, Subnets, routing tables, internet gateway .
 
 ## CI/CD Steps
 
-We can use git Actions to perform the CI/CD steps. Here is the example below
+We can use Git Actions to perform the CI/CD steps. Here is the example below
 
 
 ```
@@ -56,6 +56,8 @@ We can use git Actions to perform the CI/CD steps. Here is the example below
 ```
 
 We can also use Jenkins to perfom the CI/CD task.
+
+In jenkins we have to integrate this git and using Jenkins pipeline we can perform the build actions
 
 
 
