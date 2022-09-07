@@ -33,6 +33,49 @@ versions.tf : Given the terraform version in this file.
 vpc.tf: Created the VPC, Subnets, routing tables, internet gateway .
 
 
+## CI/CD Steps
+
+We can use git Actions to perform the CI/CD steps. Here is the example below
+
+name: CI
+
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  build:
+    runs-on: self-hosted # Have to add the hostip in the actions
+    steps:
+     - name: Check out the repo
+       uses: actions/checkout@v2
+     - name: Set Relase version
+       id: vars
+       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+     - name: build docker image and push to ecr repo
+       run: |
+          $(aws ecr get-login --no-include-email --region ap-south-1)
+          docker build -t ${{ secrets.ECR_REPO_NAME }}/nodeapp:${{ env.RELEASE_VERSION  }} .
+          docker push ${{ secrets.ECR_REPO_NAME }}/nodeapp:${{ env.RELEASE_VERSION }}
+       env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          
+     - name: Check tag version
+       run: | 
+           echo $RELEASE_VERSION
+           echo ${{ env.RELEASE_VERSION }}
+           echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+           echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+     - name: terraform initialization 
+       run: cd devops/ && terraform init 
+     - name: terraform deployment
+       run: cd devops/ && terraform apply -var="tag=${{ env.RELEASE_VERSION }}"  -auto-approve
+
+We can also use Jenkins to perfom the CI/CD task
+
+
 
 
 
