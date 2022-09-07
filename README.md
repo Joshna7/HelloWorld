@@ -1,6 +1,8 @@
 # Provisioning VPC, ECS Fagrate, ALB, Autoscaling using Terraform
  Having AWS account and Terraform CLI installed.
 
+NOTE : Have already push the image to AWS ECR registry manually. Attached the image in ECR.png
+
 
 ## Documentation
 
