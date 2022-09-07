@@ -37,6 +37,8 @@ vpc.tf: Created the VPC, Subnets, routing tables, internet gateway .
 
 We can use git Actions to perform the CI/CD steps. Here is the example below
 
+
+```
 name: CI
 
 on:
@@ -72,6 +74,8 @@ jobs:
        run: cd devops/ && terraform init 
      - name: terraform deployment
        run: cd devops/ && terraform apply -var="tag=${{ env.RELEASE_VERSION }}"  -auto-approve
+
+```
 
 We can also use Jenkins to perfom the CI/CD task
 
