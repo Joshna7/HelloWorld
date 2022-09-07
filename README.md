@@ -11,7 +11,9 @@ Containerized the application using AWS ECS Fargate using Terraform
 Usage of each file:
 
 alb.tf : created Application Load Balancer with target groups, security group and listener.
+
 auto_scaling.tf : Created autoscaling for the application based on Capacity, Cpu Utilization and Memory
+
 ecs.tf
 
 
